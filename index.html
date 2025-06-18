@@ -23,11 +23,6 @@
 
     <!-- 内联CSS样式 -->
     <style>
-/**
- * 最终的、完整的CSS解决方案
- * 将此代码放入 <style> 标签中
- */
-
 /* 1. 全局设置：解决展开/折叠内容时，因滚动条出现导致的页面抖动问题 */
 html {
     scrollbar-gutter: stable;
@@ -52,17 +47,6 @@ body {
     background-size: cover; 
 }
 
-/* 3. 手机端覆盖样式 (屏幕宽度小于等于768px时生效) */
-@media (max-width: 768px) {
-    body {
-        /* 关键: 在手机上改为普通滚动，禁用视差效果 */
-        background-attachment: scroll;
-
-        /* 关键: 调整背景尺寸以解决手机上过度放大的问题。
-           'auto 100%' 的意思是让图片高度铺满整个页面长度，宽度等比缩放。*/
-        background-size: auto 100%;
-    }
-}
         body {
             margin: 0
             /* 主体文字使用 Inter 字体 */
