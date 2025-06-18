@@ -23,14 +23,46 @@
 
     <!-- 内联CSS样式 -->
     <style>
-        @media (max-width: 768px) {
-            body {
-                background-attachment: scroll !important;
-                }
-        }
-        html {
-        scrollbar-gutter: stable;
-        }
+/**
+ * 最终的、完整的CSS解决方案
+ * 将此代码放入 <style> 标签中
+ */
+
+/* 1. 全局设置：解决展开/折叠内容时，因滚动条出现导致的页面抖动问题 */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* 2. 默认样式 (主要用于电脑端)：包含背景视差滚动效果 */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #1a202c;
+    margin: 0;
+
+    /* --- 背景图相关 --- */
+    background-image: linear-gradient(to bottom, rgba(245, 247, 250, 0) 0%, #f5f7fa 80%), url('images/background.jpg');
+    background-color: #f5f7fa; /* 后备颜色 */
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+    /* 关键: 默认在电脑端使用 fixed 实现视差滚动 */
+    background-attachment: fixed; 
+    
+    /* 关键: cover 会让背景图铺满容器，在 fixed 模式下是铺满视口 */
+    background-size: cover; 
+}
+
+/* 3. 手机端覆盖样式 (屏幕宽度小于等于768px时生效) */
+@media (max-width: 768px) {
+    body {
+        /* 关键: 在手机上改为普通滚动，禁用视差效果 */
+        background-attachment: scroll;
+
+        /* 关键: 调整背景尺寸以解决手机上过度放大的问题。
+           'auto 100%' 的意思是让图片高度铺满整个页面长度，宽度等比缩放。*/
+        background-size: auto 100%;
+    }
+}
         body {
             margin: 0
             /* 主体文字使用 Inter 字体 */
