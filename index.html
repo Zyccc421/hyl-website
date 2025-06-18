@@ -22,156 +22,137 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
     <!-- 内联CSS样式 -->
-    <style>
-/* 1. 全局设置：解决展开/折叠内容时，因滚动条出现导致的页面抖动问题 */
-html {
-    scrollbar-gutter: stable;
-}
+<style>
+    /* 1. 全局设置：解决展开/折叠内容时，因滚动条出现导致的页面抖动问题 */
+    html {
+        scrollbar-gutter: stable;
+    }
 
-/* 2. 默认样式 (主要用于电脑端)：包含背景视差滚动效果 */
-body {
-    font-family: 'Inter', sans-serif;
-    color: #1a202c;
-    margin: 0;
+    /* 2. 默认样式 (主要用于电脑端)：包含背景视差滚动效果 */
+    body {
+        font-family: 'Inter', sans-serif;
+        color: #1a202c;
+        margin: 0;
 
-    /* --- 背景图相关 --- */
-    background-image: linear-gradient(to bottom, rgba(245, 247, 250, 0) 0%, #f5f7fa 80%), url('images/background.jpg');
-    background-color: #f5f7fa; /* 后备颜色 */
-    background-repeat: no-repeat;
-    background-position: center center;
-    
-    /* 关键: 默认在电脑端使用 fixed 实现视差滚动 */
-    background-attachment: fixed; 
-    
-    /* 关键: cover 会让背景图铺满容器，在 fixed 模式下是铺满视口 */
-    background-size: cover; 
-}
+        /* --- 背景图相关 --- */
+        background-image: linear-gradient(to bottom, rgba(245, 247, 250, 0) 0%, #f5f7fa 80%), url('images/background.jpg');
+        background-color: #f5f7fa;
+        /* 后备颜色 */
+        background-repeat: no-repeat;
+        background-position: center center;
 
-        body {
-            margin: 0
-            /* 主体文字使用 Inter 字体 */
-            font-family: 'Inter', sans-serif;
-            /* 默认文字颜色 */
-            color: #1a202c;
+        /* 关键: 默认在电脑端使用 fixed 实现视差滚动 */
+        background-attachment: fixed;
 
-            /* 背景图片和渐变叠加 */
-            background-image: linear-gradient(to bottom, rgba(245, 247, 250, 0) 0%, #f5f7fa 80%), url('images/background.jpg');
-            /* 背景图尺寸覆盖整个容器 */
-            background-size: cover;
-            /* 背景图不重复平铺 */
-            background-repeat: no-repeat;
-            /* 背景图固定，创建视差滚动效果 */
-            background-attachment: fixed;
-            /* 在背景图片加载失败时的后备纯色背景 */
-            background-color: #f5f7fa;
-            /* Fallback solid color */
-        }
+        /* 关键: cover 会让背景图铺满容器，在 fixed 模式下是铺满视口 */
+        background-size: cover;
+    }
 
-        /* 新建一个类，专门用于标题 */
-        .font-title {
-            /* 标题使用 Josefin Sans 字体 */
-            font-family: 'Josefin Sans', sans-serif;
-        }
+    /* 新建一个类，专门用于标题 */
+    .font-title {
+        /* 标题使用 Josefin Sans 字体 */
+        font-family: 'Josefin Sans', sans-serif;
+    }
 
-        /* 卡片样式（替代毛玻璃效果） */
-        .glass-card {
-            /* 我们将背景换成一个轻微透明的白色，以确保在复杂背景图上依然有好的可读性 */
-            background: rgba(255, 255, 255, 0.9);
-            /* 圆角大小 */
-            border-radius: 1rem;
-            /* 边框样式 */
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            /* 阴影效果 */
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-        }
+    /* 卡片样式（替代毛玻璃效果） */
+    .glass-card {
+        /* 我们将背景换成一个轻微透明的白色，以确保在复杂背景图上依然有好的可读性 */
+        background: rgba(255, 255, 255, 0.9);
+        /* 圆角大小 */
+        border-radius: 1rem;
+        /* 边框样式 */
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        /* 阴影效果 */
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    }
 
-        /* 折叠菜单内容面板样式 */
-        .accordion-content {
-            /* 默认最大高度为0，即隐藏状态 */
-            max-height: 0;
-            /* 隐藏溢出的内容 */
-            overflow: hidden;
-            /* 为max-height属性添加0.5秒的过渡动画 */
-            transition: max-height 0.5s ease-in-out;
-            /* 折叠内容区域的背景色 */
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+    /* 折叠菜单内容面板样式 */
+    .accordion-content {
+        /* 默认最大高度为0，即隐藏状态 */
+        max-height: 0;
+        /* 隐藏溢出的内容 */
+        overflow: hidden;
+        /* 为max-height属性添加0.5秒的过渡动画 */
+        transition: max-height 0.5s ease-in-out;
+        /* 折叠内容区域的背景色 */
+        background-color: rgba(255, 255, 255, 0.2);
+    }
 
-        /* ================================================== */
-        /* ↓↓↓ 用于“照片堆叠”效果的CSS样式 (已移至正确位置) ↓↓↓ */
-        /* ================================================== */
+    /* ================================================== */
+    /* ↓↓↓ 用于“照片堆叠”效果的CSS样式 (已移至正确位置) ↓↓↓ */
+    /* ================================================== */
 
-        /* 照片堆叠效果的容器 */
-        .photo-stack {
-            position: relative;
-            /* 关键：作为内部绝对定位元素的参照物 */
-            width: 100%;
-            max-width: 300px;
-            /* 您可以根据需要调整堆叠照片的最大宽度 */
-            margin-left: auto;
-            margin-right: auto;
-            aspect-ratio: 1 / 1;
-            /* 让容器保持一个方形的比例，可以调整 */
-            cursor: pointer;
-            /* 整个区域都显示可点击的手型光标 */
-        }
+    /* 照片堆叠效果的容器 */
+    .photo-stack {
+        position: relative;
+        /* 关键：作为内部绝对定位元素的参照物 */
+        width: 100%;
+        max-width: 300px;
+        /* 您可以根据需要调整堆叠照片的最大宽度 */
+        margin-left: auto;
+        margin-right: auto;
+        aspect-ratio: 1 / 1;
+        /* 让容器保持一个方形的比例，可以调整 */
+        cursor: pointer;
+        /* 整个区域都显示可点击的手型光标 */
+    }
 
-        /* 堆叠中的每一个项目（也就是包裹图片的<a>标签） */
-        .stack-item {
-            position: absolute;
-            /* 关键：让所有图片都叠在同一个位置 */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: 0.75rem;
-            /* 圆角 */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-            /* 阴影 */
-            overflow: hidden;
-            /* 隐藏图片溢出的部分 */
-            transition: transform 0.3s ease-in-out;
-            /* 为所有变换添加平滑过渡动画 */
-        }
+    /* 堆叠中的每一个项目（也就是包裹图片的<a>标签） */
+    .stack-item {
+        position: absolute;
+        /* 关键：让所有图片都叠在同一个位置 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 0.75rem;
+        /* 圆角 */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        /* 阴影 */
+        overflow: hidden;
+        /* 隐藏图片溢出的部分 */
+        transition: transform 0.3s ease-in-out;
+        /* 为所有变换添加平滑过渡动画 */
+    }
 
-        .stack-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* 确保图片填满容器且不变形 */
-        }
+    .stack-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* 确保图片填满容器且不变形 */
+    }
 
-        /* 为堆叠中的不同图片设置初始的旋转角度和层级 */
-        .stack-item-1 {
-            transform: rotate(-8deg);
-            z-index: 10;
-        }
+    /* 为堆叠中的不同图片设置初始的旋转角度和层级 */
+    .stack-item-1 {
+        transform: rotate(-8deg);
+        z-index: 10;
+    }
 
-        .stack-item-2 {
-            transform: rotate(4deg);
-            z-index: 20;
-        }
+    .stack-item-2 {
+        transform: rotate(4deg);
+        z-index: 20;
+    }
 
-        .stack-item-3 {
-            transform: rotate(-2deg);
-            z-index: 30;
-            /* z-index最高的在最上面 */
-        }
+    .stack-item-3 {
+        transform: rotate(-2deg);
+        z-index: 30;
+        /* z-index最高的在最上面 */
+    }
 
-        /* 当鼠标悬停在整个容器上时，让图片“散开” */
-        .photo-stack:hover .stack-item-1 {
-            transform: rotate(-12deg) translateX(-25%) scale(1.05);
-        }
+    /* 当鼠标悬停在整个容器上时，让图片“散开” */
+    .photo-stack:hover .stack-item-1 {
+        transform: rotate(-12deg) translateX(-25%) scale(1.05);
+    }
 
-        .photo-stack:hover .stack-item-2 {
-            transform: rotate(8deg) translateX(20%) scale(1.05);
-        }
+    .photo-stack:hover .stack-item-2 {
+        transform: rotate(8deg) translateX(20%) scale(1.05);
+    }
 
-        .photo-stack:hover .stack-item-3 {
-            transform: rotate(2deg) translateY(-20%) scale(1.05);
-        }
-    </style>
+    .photo-stack:hover .stack-item-3 {
+        transform: rotate(2deg) translateY(-20%) scale(1.05);
+    }
+</style>
 
 </head>
 <!-- antialiased 类用于平滑字体渲染，使其更清晰 -->
