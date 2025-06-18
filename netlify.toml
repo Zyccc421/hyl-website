@@ -11,7 +11,7 @@
   from = "/"
   # 根据浏览器语言设置进行跳转
   # 将所有中文用户（zh-CN, zh-SG, zh-TW, zh-HK）导向 /zh/ 目录
-  to = "/zh/"
+  to = "/zh-hk/"
   status = 302
   force = true
   conditions = {Language = ["zh", "zh-cn", "zh-sg", "zh-tw", "zh-hk"]}
