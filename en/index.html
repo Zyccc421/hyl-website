@@ -72,17 +72,6 @@
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
     }
 
-    /* 折叠菜单内容面板样式 */
-    .accordion-content {
-        /* 默认最大高度为0，即隐藏状态 */
-        max-height: 0;
-        /* 隐藏溢出的内容 */
-        overflow: hidden;
-        /* 为max-height属性添加0.5秒的过渡动画 */
-        transition: max-height 0.5s ease-in-out;
-        /* 折叠内容区域的背景色 */
-        background-color: rgba(255, 255, 255, 0.2);
-    }
 
     /* ================================================== */
     /* ↓↓↓ 用于“照片堆叠”效果的CSS样式 (已移至正确位置) ↓↓↓ */
@@ -158,6 +147,185 @@
     .photo-stack:hover .stack-item-3 {
         transform: rotate(2deg) translateY(-20%) scale(1.05);
     }
+    
+    .photography-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            /* 根据需要调整最小宽度 */
+            gap: 8px;
+            /* 调整图片之间的间距 */
+        }
+
+        .photography-grid a {
+            display: block;
+            /* 使链接占据整个 grid cell */
+        }
+
+        .photography-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            /* 如果需要 */
+            object-fit: cover;
+            /* 保持图片比例 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* 如果需要 */
+            transition: transform 0.3s ease-in-out;
+            /* 如果需要 */
+        }
+
+        .photography-grid img:hover {
+            transform: scale(1.05);
+            /* 如果需要 */
+        }
+
+        /* --- 全局与字体设置 --- */
+        html {
+            scroll-behavior: smooth;
+            /* 平滑滚动效果 */
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            /* 全局中文字体 */
+            background-color: #f8f9fa;
+            /* 设置一个淡雅的背景色 */
+        }
+
+        .font-title {
+            /* 标题优先使用 Josefin Sans, 中文回退到 Noto Sans SC 的粗体 */
+            font-family: 'Josefin Sans', 'Noto Sans SC', sans-serif;
+            font-weight: 700;
+        }
+
+        /* --- 卡片样式 --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            /* 半透明背景，营造质感 */
+            border-radius: 1rem;
+            /* 圆角 */
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+            /* 精致的阴影 */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            /* 细微的边框 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* 平滑的过渡动画 */
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            /* 鼠标悬浮时轻微上移 */
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
+            /* 悬浮时阴影加深 */
+        }
+
+        /* --- 展开/折叠内容的容器 --- */
+        .accordion-content {
+            padding-top: 1rem;
+            /* 等同于之前展开后的 pt-4 */
+            padding-bottom: 1rem;
+            /* 增加底部间距 */
+        }
+
+
+        /* --- 照片堆叠效果 --- */
+        .photo-stack {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            aspect-ratio: 4 / 3;
+            /* 固定宽高比 */
+            cursor: pointer;
+        }
+
+        .stack-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 0.75rem;
+            /* 圆角 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .stack-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 保证图片填充容器且不变形 */
+        }
+
+        /* 堆叠中各图片的初始旋转和层级 */
+        .stack-item:nth-child(1) {
+            transform: rotate(-8deg);
+            z-index: 10;
+        }
+
+        .stack-item:nth-child(2) {
+            transform: rotate(4deg);
+            z-index: 20;
+        }
+
+        .stack-item:nth-child(3) {
+            transform: rotate(-2deg);
+            z-index: 30;
+        }
+
+        /* 鼠标悬浮时，图片散开的效果 */
+        .photo-stack:hover .stack-item:nth-child(1) {
+            transform: rotate(-12deg) translateX(-25%) scale(1.05);
+        }
+
+        .photo-stack:hover .stack-item:nth-child(2) {
+            transform: rotate(8deg) translateX(25%) scale(1.05);
+        }
+
+        .photo-stack:hover .stack-item:nth-child(3) {
+            transform: rotate(2deg) translateY(-20%) scale(1.05);
+        }
+
+        /* --- 瀑布流布局样式 --- */
+        .masonry-gallery {
+            /* 核心：定义列数和列间距 */
+            column-count: 4;
+            /* 在大屏幕上显示4列 */
+            column-gap: 1rem;
+            /* 16px 的列间距 */
+        }
+
+        .masonry-gallery a {
+            /* 防止图片在跨列时被切断 */
+            break-inside: avoid;
+            display: block;
+            /* 使链接成为块级元素 */
+            margin-bottom: 1rem;
+            /* 图片下方的间距 */
+            border-radius: 0.5rem;
+            /* 轻微的圆角 */
+            overflow: hidden;
+            /* 隐藏溢出的部分，配合圆角 */
+        }
+
+        /* 响应式设计：在不同屏幕尺寸下调整列数 */
+        @media (max-width: 1024px) {
+            .masonry-gallery {
+                column-count: 3;
+                /* 中等屏幕(如平板)显示3列 */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .masonry-gallery {
+                column-count: 2;
+                /* 小型屏幕(如手机)显示2列 */
+            }
+        }
 </style>
 
 </head>
@@ -348,483 +516,342 @@
         </section>
 
         <!-- 新的作品集部分 -->
-        <section id="portfolio" class="py-24">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-extrabold text-center mb-16 text-gray-800 font-title">Portfolio</h2>
-                <div class="space-y-8">
-
-                    <!-- 作品分类折叠菜单: 微电影 -->
-                    <div class="glass-card overflow-hidden">
-                        <!-- 这是分类的触发器，点击这里会展开/收起下面的内容 -->
-                        <div class="p-8 text-center cursor-pointer category-toggle-btn">
-                            <h3 class="text-3xl font-bold text-gray-800 mb-6 font-title">Short Film</h3>
-                            <!-- pointer-events-none 让这个按钮本身不响应点击，点击事件由父元素处理 -->
-                            <button class="toggle-button bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-black transition-colors pointer-events-none">View</button>
-                        </div>
-                        <!-- 这是可折叠的内容区域 -->
-                        <div class="accordion-content category-accordion-content">
-                            <div class="p-4 space-y-4 border-t border-white/30">
-
-                                <!-- 项目条目: 获奖作品 -->
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <!-- 项目的头部，也是一个折叠触发器 -->
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">Huo Jiang‘s Work</p>
-                                            <p class="text-gray-700 text-sm">Role: Director / Screenwriter / Photographer / Editor</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <!-- 项目的折叠内容 -->
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                            <div class="md:col-span-1">
-                                                <p class="text-gray-800">The Second Prize at the 8th Fujian Province University Student Film Festival /the Cross-Strait Youth Online Audio-Visual Exhibition Award
-                                                    <br> <br>A young girl named Huo Jiang from a magical island has always dreamed of seeing the ocean, but her pursuit of this dream is met with much ridicule. It is not until she meets an elderly fisherman who has lived on the island for many years that she comes to understand the true meaning of the sea. In reality, all of this is the content of a short film written by a screenwriter named Erin, who harbors a dream of becoming a director. Unbeknownst to her, this short film would become her first award-winning work…<br><br>
-                                        <a href="https://vimeo.com/1080811164?share=copy">LINK：https://vimeo.com/1080811164?share=copy</a><br><br>
-
-                                                </p>
-                                            </div>
-                                            <div class="md:col-span-1 flex items-center justify-center">
-
-                                                <div class="photo-stack">
-
-                                                    <a href="images/weidianying-huojiangzuoping-1.png" data-fancybox="gallery-huojiang" data-caption="获奖作品 海报" class="stack-item stack-item-3">
-                                                        <img src="images/weidianying-huojiangzuoping-1.png" alt="Huo Jiang's Work Poster">
-                                                    </a>
-
-                                                    <a href="images/weidianying-huojiangzuoping-2.png" data-fancybox="gallery-huojiang" data-caption="获奖作品 剧照 1" class="stack-item stack-item-2">
-                                                        <img src="images/weidianying-huojiangzuoping-2.png" alt="Still from Huo Jiang's Work">
-                                                    </a>
-
-                                                    <a href="images/weidianying-huojiangzuoping-3.png" data-fancybox="gallery-huojiang" data-caption="获奖作品 剧照 2" class="stack-item stack-item-1">
-                                                        <img src="images/weidianying-huojiangzuoping-3.png" alt="Still from Huo Jiang's Work1">
-                                                    </a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!-- 项目条目: 归途 -->
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow ">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">Road of Redemption
-                                            </p>
-                                            <p class="text-gray-700 text-sm">Role: Project Planner / Screenwriter</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                            <div class="md:col-span-1">
-                                                <p class="text-gray-800">Xiamen Anti-Drug Awareness Series of Short Plays
-                                                    <br><br>
-                                                    The entire series consists of six short plays, weaving together two narrative threads: “Completing the Mission” and “Listening to Stories,” which correspond to the “Present Timeline” and “Memory Timeline.” Through the interplay of these two threads, the series explores memories within the present and reflects on the present through memories. Using the approach of “learning from the past to inform the present,” the series tells stories centered on drugs and drug users, delivering real-time education in the “real-time space” from the perspective of those who have experienced it firsthand, thereby conveying educational significance.
-                                                    <br><br><a href="https://vimeo.com/1080810865?share=copy">LINK：https://vimeo.com/1080810865?share=copy</a><br><br>
-
-                                                </p>
-                                            </div>
-                                            <div class="md:col-span-1 flex items-center justify-center">
-                                                <div class="photo-stack">
-                                                    <a href="images/weidianying-guitu-1.png" data-fancybox="gallery-guitu" data-caption="《归途》剧照 1" class="stack-item stack-item-1">
-                                                        <img src="images/weidianying-guitu-1.png" alt="Still from Road of Redemption" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/weidianying-guitu-2.png" data-fancybox="gallery-guitu" data-caption="《归途》剧照 2" class="stack-item stack-item-3">
-                                                        <img src="images/weidianying-guitu-2.png" alt="Still from Road of Redemption 2" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/weidianying-guitu-3.png" data-fancybox="gallery-guitu" data-caption="《归途》剧照 3" class="stack-item stack-item-2">
-                                                        <img src="images/weidianying-guitu-3.png" alt="Still from Road of Redemption 3" class="w-full h-full object-cover">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">Deaf, Decibel, Defiance</p>
-                                            <p class="text-gray-700 text-sm">Role: Short Film / Graduation Project</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                            <div class="md:col-span-1">
-                                                <p class="text-gray-800">Creative Short Film/Graduation Project
-                                                    <br><br>
-                                                    Deaf girl Zou Yi swallows a mysterious pill that gives her 24 hours of hearing. She begins a race against time to imprint as many sounds as possible into her mind, but later discovers that not all the sounds around her are pleasant, and her view of her deafness changes...
-                                                    <br><br><a href="https://vimeo.com/1093635413?share=copy">LINK：https://vimeo.com/1093635413?share=copy</a><br><br>
-                                                </p>
-                                            </div>
-                                            <div class="md:col-span-1 flex items-center justify-center">
-                                                <div class="photo-stack">
-                                                    <a href="images/weidianying-dangshijieturanxuanxiao-1.pic.jpg" data-fancybox="gallery-xuanxiao" data-caption="《当世界突然喧嚣》剧照 1" class="stack-item stack-item-3">
-                                                        <img src="images/weidianying-dangshijieturanxuanxiao-1.pic.jpg" alt="Still from《当世界突然喧嚣》1" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/weidianying-dangshijieturanxuanxiao-2.png" data-fancybox="gallery-xuanxiao" data-caption="《当世界突然喧嚣》剧照 2" class="stack-item stack-item-2">
-                                                        <img src="images/weidianying-dangshijieturanxuanxiao-2.png" alt="Still from《当世界突然喧嚣》2" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/weidianying-dangshijieturanxuanxiao-3.png" data-fancybox="gallery-xuanxiao" data-caption="《当世界突然喧嚣》剧照 3" class="stack-item stack-item-1">
-                                                        <img src="images/weidianying-dangshijieturanxuanxiao-3.png" alt="Still from《当世界突然喧嚣》3" class="w-full h-full object-cover">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 作品分类折叠菜单: TVC -->
-                    <div class="glass-card overflow-hidden">
-                        <div class="p-8 text-center cursor-pointer category-toggle-btn">
-                            <h3 class="text-3xl font-bold text-gray-800 mb-6 font-title">TVC</h3>
-                            <button class="toggle-button bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-black transition-colors pointer-events-none">View</button>
-                        </div>
-                        <div class="accordion-content category-accordion-content">
-                            <div class="p-4 space-y-4 border-t border-white/30">
-                                <!-- 项目条目: 厦门马拉松 -->
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">2024 C&D Xiamen International Marathon Promotional Video</p>
-                                            <p class="text-gray-700 text-sm">Role: Copywriter/Assistant Director</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                            <div class="md:col-span-1">
-                                                <p class="text-gray-800"><a href="https://vimeo.com/1080807416?share=copy">LINK：https://vimeo.com/1080807416?share=copy</a><br><br>
-                                       
-                                                </p>
-                                            </div>
-                                            <div class="md:col-span-1 flex items-center justify-center">
-                                                <div class="photo-stack">
-                                                    <a href="images/TVC-xiamenmalasong-4.png" data-fancybox="gallery-xiamen-marathon" data-caption="厦门马拉松 TVC 截图 4" class="stack-item" style="z-index: 5; transform: rotate(10deg);">
-                                                        <img src="images/TVC-xiamenmalasong-4.png" alt="TVC Still 4" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/TVC-xiamenmalasong-1.png" data-fancybox="gallery-xiamen-marathon" data-caption="厦门马拉松 TVC 截图 1" class="stack-item stack-item-1">
-                                                        <img src="images/TVC-xiamenmalasong-1.png" alt="TVC Still 1" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/TVC-xiamenmalasong-2.png" data-fancybox="gallery-xiamen-marathon" data-caption="厦门马拉松 TVC 截图 2" class="stack-item stack-item-2">
-                                                        <img src="images/TVC-xiamenmalasong-2.png" alt="TVC Still 2" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/TVC-xiamenmalasong-3.png" data-fancybox="gallery-xiamen-marathon" data-caption="厦门马拉松 TVC 截图 3" class="stack-item stack-item-3">
-                                                        <img src="images/TVC-xiamenmalasong-3.png" alt="TVC Still 3" class="w-full h-full object-cover">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 项目条目: 双拥号列车 -->
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">Xiamen Double Support Train Government Promotional Video</p>
-                                            <p class="text-gray-700 text-sm">Role: Copywriter/Director</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                            <div class="md:col-span-1">
-                                                <p class="text-gray-800"><a href="https://vimeo.com/1080807516?share=copy">LINK：https://vimeo.com/1080807516?share=copy</a><br><br></p>
-                                            </div>
-                                            <div class="md:col-span-1 flex items-center justify-center">
-                                                <div class="photo-stack">
-                                                    <a href="images/TVC-shuangyonghaolieche-4.png" data-fancybox="gallery-shuangyong" data-caption="双拥号列车 TVC 截图 4" class="stack-item" style="z-index: 5; transform: rotate(10deg);">
-                                                        <img src="images/TVC-shuangyonghaolieche-4.png" alt="TVC Still 4" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/TVC-shuangyonghaolieche-1.png" data-fancybox="gallery-shuangyong" data-caption="双拥号列车 TVC 截图 1" class="stack-item stack-item-1">
-                                                        <img src="images/TVC-shuangyonghaolieche-1.png" alt="TVC Still 1" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/TVC-shuangyonghaolieche-2.png" data-fancybox="gallery-shuangyong" data-caption="双拥号列车 TVC 截图 2" class="stack-item stack-item-2">
-                                                        <img src="images/TVC-shuangyonghaolieche-2.png" alt="TVC Still 2" class="w-full h-full object-cover">
-                                                    </a>
-                                                    <a href="images/TVC-shuangyonghaolieche-3.png" data-fancybox="gallery-shuangyong" data-caption="双拥号列车 TVC 截图 3" class="stack-item stack-item-3">
-                                                        <img src="images/TVC-shuangyonghaolieche-3.png" alt="TVC Still 3" class="w-full h-full object-cover">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card overflow-hidden">
-                        <div class="p-8 text-center cursor-pointer category-toggle-btn">
-                            <h3 class="text-3xl font-bold text-gray-800 mb-6 font-title">Project Proposals</h3>
-                            <button class="toggle-button bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-black transition-colors pointer-events-none">View</button>
-                        </div>
-
-                        <div class="accordion-content category-accordion-content">
-
-                            <div class="px-8 sm:px-12 pt-4 pb-6">
-                                <div class="bg-white/30 p-6 rounded-lg">
-                                    <p class="text-gray-800 leading-relaxed">
-                                        1. “Let's Go”<br>
-                                        The First Slow-Paced Travel Reality Show Featuring Generation Z<br><br>
-                                        2. “Twenty Years of Dedication, Love for Dali Garden” <br>
-                                        Dali Garden's 2022 Spring Brand Marketing Campaign <br><br>
-                                        3. “The Other Side of Young People” <br>
-                                        Xianmianzhuan Noodles & Wuling Automobile Co-Branding Marketing Campaign
-                                        <br><br><a href="https://pan.baidu.com/s/1DbqkwyMFfYgnUVFPVV8Cjg?pwd=p44m">LINK: https://pan.baidu.com/s/1DbqkwyMFfYgnUVFPVV8Cjg?pwd=p44m code: p44m</a><br><br>
-                                        
-
-
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="px-8 sm:px-20 pb-8">
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                                    <a href="images/zouba.jpg" data-fancybox="proposals" data-caption="《走吧》Let's GoGoGo - Variety Show Proposal">
-                                        <img src="images/zouba.jpg" alt="Let's GoGoGo Proposal Cover" class="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                                    </a>
-                                    <a href="images/daliyuan.jpg" data-fancybox="proposals" data-caption="Daliyuan & Wuling Co-branding Proposal">
-                                        <img src="images/daliyuan.jpg" alt="Daliyuan and Wuling Co-branding Proposal" class="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                                    </a>
-                                    <a href="images/xianmianzhuan.jpg" data-fancybox="proposals" data-caption="《鲜面传》Co-branding Proposal">
-                                        <img src="images/xianmianzhuan.jpg" alt="Xianmian Legend Co-branding Proposal" class="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="glass-card overflow-hidden">
-                        <div class="p-8 text-center cursor-pointer category-toggle-btn">
-                            <h3 class="text-3xl font-bold text-gray-800 mb-6 font-title">Social Media Operation</h3>
-                            <button class="toggle-button bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-black transition-colors pointer-events-none">View</button>
-                        </div>
-                        <div class="accordion-content category-accordion-content">
-                            <div class="p-4 border-t border-white/30 grid grid-cols-1 md:grid-cols-3 gap-4">
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden flex flex-col">
-                                    <div class="project-header flex justify-between items-center p-4">
-                                        <div class="flex-grow text-center">
-                                            <p class="text-lg font-bold text-gray-800">RED account: 今天柒啥桃</p>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 pt-2 flex flex-col items-center text-center gap-4 flex-grow">
-                                        <a href="images/meitiyunying-chengshiquanquan-1.png" data-fancybox="gallery-media-new" data-caption="Weibo Account: 成实圈圈">
-                                            <img src="images/meitiyunying-chengshiquanquan-1.png" alt="成实圈圈 微博截图" class="max-h-[300px] w-auto h-auto rounded-lg shadow-xl transition-transform hover:scale-105">
-                                        </a>
-                                        <p class="text-gray-800 text-sm text-left w-full">Build and incubate the account from scratch;<br>
-                                            Plan special topics and online activities, and create text and image content;<br>
-                                            Collaborate with offline events to expand content reach, achieving nearly 1,000 traffic conversions.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden flex flex-col">
-                                    <div class="project-header flex justify-between items-center p-4">
-                                        <div class="flex-grow text-center">
-                                            <p class="text-lg font-bold text-gray-800">WeChat: 火星馬戲團藝術書店</p>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 pt-2 flex flex-col items-center text-center gap-4 flex-grow">
-                                        <a href="images/meitiyunying-huoxingmaxituan-1.png.png" data-fancybox="gallery-media-new" data-caption="WeChat Official Account: 火星马戏团艺术书店">
-                                            <img src="images/meitiyunying-huoxingmaxituan-1.png.png" alt="火星马戏团艺术书店 微信公众号截图" class="max-h-[300px] w-auto h-auto rounded-lg shadow-xl transition-transform hover:scale-105">
-                                        </a>
-                                        <p class="text-gray-800 text-sm text-left w-full">Complete platform matrix setup and produce video content;<br>
-                                            Maintain community operations and plan online events;<br>
-                                            Achieve over 50,000 shopping cart conversions.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden flex flex-col">
-                                    <div class="project-header flex justify-between items-center p-4">
-                                        <div class="flex-grow text-center">
-                                            <p class="text-lg font-bold text-gray-800">Tiktok account: 咪咕視頻</p>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 pt-2 flex flex-col items-center text-center gap-4 flex-grow">
-                                        <a href="images/meitiyunying-migutiyu-1.png.png" data-fancybox="gallery-media-new" data-caption="RED Account: 咪咕体育">
-                                            <img src="images/meitiyunying-migutiyu-1.png.png" alt="咪咕体育 小红书截图" class="max-h-[300px] w-auto h-auto rounded-lg shadow-xl transition-transform hover:scale-105">
-                                        </a>
-                                        <p class="text-gray-800 text-sm text-left w-full">Assist in the overall operation of the company's platform accounts;<br>
-                                            Plan over 10 special topics based on current popular variety shows;<br>
-                                            Edit over 100 short videos.
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card overflow-hidden">
-                        <div class="p-8 text-center cursor-pointer category-toggle-btn">
-                            <h3 class="text-3xl font-bold text-gray-800 mb-6 font-title">Graphic works</h3>
-                            <button class="toggle-button bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-black transition-colors pointer-events-none">View</button>
-                        </div>
-
-                        <div class="accordion-content category-accordion-content">
-                            <div class="p-4 space-y-4 border-t border-white/30">
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">Poster</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8">
-                                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                                                <img src="images/haibao-diangyinghaibao-1.png" alt="Movie Poster 1" class="w-full h-auto rounded-lg object-cover shadow-md">
-                                                <img src="images/haibao-dianyinghaibao-2.png" alt="Movie Poster 2" class="w-full h-auto rounded-lg object-cover shadow-md">
-                                                <img src="images/haibao-sheyinghaibao-1.jpg" alt="Photo Poster 1" class="w-full h-auto rounded-lg object-cover shadow-md">
-                                                <img src="images/haibao-sheyinghaibao-2.jpg" alt="Photo Poster 2" class="w-full h-auto rounded-lg object-cover shadow-md">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">Photography </p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-4 md:p-6">
-                                            <div id="photography-gallery" class="flex flex-wrap">
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-chuangyisheying-1.pic.jpg" alt="Creative Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-chuangyisheying-2.pic.jpg" alt="Creative Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-chuangyisheying-3.pic.jpg" alt="Creative Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-jingwusheying-1.jpg" alt="Landscape Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-jingwusheying-2.jpg" alt="Landscape Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-jingwusheying-3.jpg" alt="Landscape Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-renxiangsheying-1.jpg" alt="Portrait Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-renxiangsheying-2.jpg" alt="Portrait Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-renxiangsheying-3.jpg" alt="Portrait Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-shangyesheying-1.jpg" alt="Commercial Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-shangyesheying-2.jpg" alt="Commercial Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                                <div class="w-1/2 sm:w-1/3 md:w-1/4 p-2 masonry-item">
-                                                    <img src="images/sheying-shangyesheying-3.jpg" alt="Commercial Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card overflow-hidden">
-                        <div class="p-8 text-center cursor-pointer category-toggle-btn">
-                            <h3 class="text-3xl font-bold text-gray-800 mb-6 font-title">Exhibition</h3>
-                            <button class="toggle-button bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-black transition-colors pointer-events-none">View</button>
-                        </div>
-                        <div class="accordion-content category-accordion-content">
-                            <div class="p-4 space-y-4 border-t border-white/30">
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">Minnan Dialect Pun Materialization Exhibition</p>
-                                            <p class="text-gray-700 text-sm">Role: Curator/Poster & IP merchandise Design/Social Media Account Management</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                            <div class="md:col-span-1">
-                                                <p class="text-gray-800">This project targets young audiences in the Fujian and Taiwan region, tracing the origins of unique words in the Minnan dialect and developing creative concepts. It combines an offline exhibition with online interactive promotions, presenting the content in a visually engaging manner through channels popular among contemporary young people. New media tools are utilized for integrated online marketing and communication to challenge the perception that Minnan is “outdated” or “backward.”<br><br>
-                                                    The exhibition was held at Xiamen SM City Plaza Phase 3 in May 2023 and was covered by multiple media outlets including Xuexi Qiangguo and Sina News. Additionally, the project operates an online WeChat official account “Qi Tao FM” and a Xiaohongshu account @Today's Qi Tao, with a total fan base exceeding 1,000.<br><br>
-                                                    <a href="https://mp.weixin.qq.com/s/ELraDZ6AqHSQopFmIJFGVg">Link: https://mp.weixin.qq.com/s/ELraDZ6AqHSQopFmIJFGVg</a><br><br>
-                                                </p>
-                                            </div>
-                                            <div class="md:col-span-1 flex items-center justify-center">
-                                                <div class="photo-stack">
-                                                    <a href="images/zhanlan-minnan-5.jpg" data-fancybox="gallery-minnan" data-caption="闽南语谐音梗展览图片 5" class="stack-item" style="z-index: 3; transform: rotate(12deg);"><img src="images/zhanlan-minnan-5.jpg" alt="闽南语谐音梗展览图片5" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-minnan-3.jpg" data-fancybox="gallery-minnan" data-caption="闽南语谐音梗展览图片 4" class="stack-item" style="z-index: 5; transform: rotate(-15deg);"><img src="images/zhanlan-minnan-3.jpg" alt="闽南语谐音梗展览图片4" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-minnan-1.jpg" data-fancybox="gallery-minnan" data-caption="闽南语谐音梗展览图片 1" class="stack-item stack-item-1"><img src="images/zhanlan-minnan-1.jpg" alt="闽南语谐音梗展览图片1" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-minnan-2.png" data-fancybox="gallery-minnan" data-caption="闽南语谐音梗展览图片 2" class="stack-item stack-item-2"><img src="images/zhanlan-minnan-2.png" alt="闽南语谐音梗展览图片2" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-minnan-4.jpg" data-fancybox="gallery-minnan" data-caption="闽南语谐音梗展览图片 3" class="stack-item stack-item-3"><img src="images/zhanlan-minnan-4.jpg" alt="闽南语谐音梗展览图片3" class="w-full h-full object-cover"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="project-item bg-white/30 rounded-lg overflow-hidden">
-                                    <div class="project-header flex justify-between items-center p-8">
-                                        <div class="flex-grow">
-                                            <p class="text-xl font-bold text-gray-800 mb-2">MIFF-Mountain Isle Film Festival</p>
-                                            <p class="text-gray-700 text-sm">Role: film selector/Film Critic/Curator's Assistant</p>
-                                        </div>
-                                        <button class="project-toggle-btn bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors flex-shrink-0">View Details</button>
-                                    </div>
-                                    <div class="accordion-content project-accordion-content">
-                                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                            <div class="md:col-span-1">
-                                                <p class="text-gray-800">Initiated independently by faculty and students from the School of Film, Television, and Communication at Xiamen University of Technology, in collaboration with the Golden Rooster Cross-Strait and Hong Kong-Macao Youth Short Film Festival, this campus film festival aims to create a warm, youthful, and intellectually stimulating platform for film enthusiasts.<br><br>
-                                                    The film festival opened on December 4, 2021, at the Xiamen Wanxiang Cinema, lasting for three days, screening a total of 9 short films, and attracting over 1,000 attendees. The festival has now successfully held five editions, garnering significant media attention, with its audience continuing to expand.<br><br>
-                                       <a href="https://mp.weixin.qq.com/s/XqKE11d9Tdc5bSPfG-V5YA">Link: https://mp.weixin.qq.com/s/XqKE11d9Tdc5bSPfG-V5YA</a><br><br>
-
-                                                </p>
-                                            </div>
-                                            <div class="md:col-span-1 flex items-center justify-center">
-                                                <div class="photo-stack">
-                                                    <a href="images/zhanlan-shan-7.png" data-fancybox="gallery-shan" data-caption="山与影像季图片 7" class="stack-item" style="z-index: 1; transform: rotate(-15deg);"><img src="images/zhanlan-shan-7.png" alt="山与影像季图片7" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-shan-6.png" data-fancybox="gallery-shan" data-caption="山与影像季图片 6" class="stack-item" style="z-index: 2; transform: rotate(18deg);"><img src="images/zhanlan-shan-6.png" alt="山与影像季图片6" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-shan-5.png" data-fancybox="gallery-shan" data-caption="山与影像季图片 5" class="stack-item" style="z-index: 3; transform: rotate(-12deg);"><img src="images/zhanlan-shan-5.png" alt="山与影像季图片5" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-shan-4.jpg" data-fancybox="gallery-shan" data-caption="山与影像季图片 4" class="stack-item" style="z-index: 4; transform: rotate(14deg);"><img src="images/zhanlan-shan-4.jpg" alt="山与影像季图片4" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-shan-1.png" data-fancybox="gallery-shan" data-caption="山与影像季图片 1" class="stack-item stack-item-3"><img src="images/zhanlan-shan-1.png" alt="山与影像季图片1" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-shan-2.jpg" data-fancybox="gallery-shan" data-caption="山与影像季图片 2" class="stack-item stack-item-2"><img src="images/zhanlan-shan-2.jpg" alt="山与影像季图片2" class="w-full h-full object-cover"></a>
-                                                    <a href="images/zhanlan-shan-3.jpg" data-fancybox="gallery-shan" data-caption="山与影像季图片 3" class="stack-item stack-item-1"><img src="images/zhanlan-shan-3.jpg" alt="山与影像季图片3" class="w-full h-full object-cover"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        <section id="portfolio" class="py-16 sm:py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-title">Portfolio</h2>
+                <p class="mt-4 text-lg text-gray-600">A selection of my featured projects</p>
             </div>
-        </section>
+
+            <!-- 筛选按钮区域 -->
+            <div id="filter-buttons" class="flex justify-center flex-wrap gap-2 sm:gap-4 mb-12">
+
+                <button data-category="film" class="filter-btn active bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">Short Films</button>
+
+                <button data-category="tvc" class="filter-btn bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">TVC</button>
+
+                <button data-category="proposal" class="filter-btn bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">Project Proposals</button>
+
+                <button data-category="social" class="filter-btn bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">Social Media Operations</button>
+
+                <button data-category="graphics" class="filter-btn bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">Graphic Works</button>
+
+                <button data-category="exhibition" class="filter-btn bg-white text-gray-700 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">Exhibitions</button>
+
+            </div>
+
+            <!-- 作品集网格布局 -->
+            <div id="portfolio-grid" class="grid grid-cols-1 gap-8">
+
+                <!-- 项目卡片: Huo Jiang‘s Work -->
+                <div class="project-card glass-card" data-category="film">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Huo Jiang's Work</h3>
+                                <p class="text-gray-600 text-sm">Role: Director / Screenwriter / Photographer / Editor</p>
+                            </div>
+
+                        </div>
+                        <div class="accordion-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                                <div class="text-gray-700 leading-relaxed">
+                                    <p>The Second Prize at the 8th Fujian Province University Student Film Festival /the Cross-Strait Youth Online Audio-Visual Exhibition Award.<br><br> A young girl named Huo Jiang from a magical island has always dreamed of seeing the ocean, but her pursuit of this dream is met with much ridicule. It is not until she meets an elderly fisherman who has lived on the island for many years that she comes to understand the true meaning of the sea. In reality, all of this is the content of a short film written by a screenwriter named Erin, who harbors a dream of becoming a director. Unbeknownst to her, this short film would become her first award-winning work…</p>
+                                    <a href="https://vimeo.com/1080811164?share=copy" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on Vimeo</a>
+                                </div>
+                                <div class="photo-stack">
+                                
+                                    <a href="images/weidianying-huojiangzuoping-2.png" data-fancybox="gallery-huojiang" class="stack-item"><img src="images/weidianying-huojiangzuoping-2.png" alt="Still from Huo Jiang's Work" onerror="this.onerror=null;this.src='https://placehold.co/600x400/64748b/ffffff?text=Image+2';"></a>
+                                    <a href="images/weidianying-huojiangzuoping-3.png" data-fancybox="gallery-huojiang" class="stack-item"><img src="images/weidianying-huojiangzuoping-3.png" alt="Still from Huo Jiang's Work 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/475569/ffffff?text=Image+3';"></a>
+                                    <a href="images/weidianying-huojiangzuoping-1.png" data-fancybox="gallery-huojiang" class="stack-item"><img src="images/weidianying-huojiangzuoping-1.png" alt="Huo Jiang's Work Poster" onerror="this.onerror=null;this.src='https://placehold.co/600x400/94a3b8/ffffff?text=Image+1';"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目卡片: Road of Redemption -->
+                <div class="project-card glass-card" data-category="film">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Road of Redemption</h3>
+                                <p class="text-gray-600 text-sm">Role: Project Planner / Screenwriter</p>
+                            </div>
+
+                        </div>
+                        <div class="accordion-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                                <div class="text-gray-700 leading-relaxed">
+                                    <p>Xiamen Anti-Drug Awareness Series of Short Plays.<br><br> The entire series consists of six short plays, weaving together two narrative threads: “Completing the Mission” and “Listening to Stories,” which correspond to the “Present Timeline” and “Memory Timeline.” Through the interplay of these two threads, the series explores memories within the present and reflects on the present through memories. Using the approach of “learning from the past to inform the present,” the series tells stories centered on drugs and drug users, delivering real-time education in the “real-time space” from the perspective of those who have experienced it firsthand, thereby conveying educational significance.</p>
+                                    <a href="https://vimeo.com/1080810865?share=copy" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on Vimeo</a>
+                                </div>
+                                <div class="photo-stack">
+                                    <a href="images/weidianying-guitu-1.png" data-fancybox="gallery-guitu" class="stack-item"><img src="images/weidianying-guitu-1.png" alt="Still from Road of Redemption" onerror="this.onerror=null;this.src='https://placehold.co/600x400/d97706/ffffff?text=Image+1';"></a>
+                                    
+                                    <a href="images/weidianying-guitu-3.png" data-fancybox="gallery-guitu" class="stack-item"><img src="images/weidianying-guitu-3.png" alt="Still from Road of Redemption 3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/92400e/ffffff?text=Image+3';"></a>
+                                    <a href="images/weidianying-guitu-2.png" data-fancybox="gallery-guitu" class="stack-item"><img src="images/weidianying-guitu-2.png" alt="Still from Road of Redemption 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/b45309/ffffff?text=Image+2';"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目卡片: Deaf, Decibel, Defiance -->
+                <div class="project-card glass-card" data-category="film">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Deaf, Decibel, Defiance</h3>
+                                <p class="text-gray-600 text-sm">Role: Short Film / Graduation Project</p>
+                            </div>
+
+                        </div>
+                        <div class="accordion-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                                <div class="text-gray-700 leading-relaxed">
+                                    <p>Creative Short Film/Graduation Project.<br><br> Deaf girl Zou Yi swallows a mysterious pill that gives her 24 hours of hearing. She begins a race against time to imprint as many sounds as possible into her mind, but later discovers that not all the sounds around her are pleasant, and her view of her deafness changes...</p>
+                                    <a href="https://vimeo.com/1093635413?share=copy" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on Vimeo</a>
+                                </div>
+                                <div class="photo-stack">
+                                    
+                                    <a href="images/weidianying-dangshijieturanxuanxiao-2.png" data-fancybox="gallery-xuanxiao" class="stack-item"><img src="images/weidianying-dangshijieturanxuanxiao-2.png" alt="Still 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/78716c/ffffff?text=Image+2';"></a>
+                                    <a href="images/weidianying-dangshijieturanxuanxiao-3.png" data-fancybox="gallery-xuanxiao" class="stack-item"><img src="images/weidianying-dangshijieturanxuanxiao-3.png" alt="Still 3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/57534e/ffffff?text=Image+3';"></a>
+                                    
+                                    <a href="images/weidianying-dangshijieturanxuanxiao-1.pic.jpg" data-fancybox="gallery-xuanxiao" class="stack-item"><img src="images/weidianying-dangshijieturanxuanxiao-1.pic.jpg" alt="Still 1" onerror="this.onerror=null;this.src='https://placehold.co/600x400/a8a29e/ffffff?text=Image+1';"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目卡片: Xiamen Marathon TVC -->
+                <div class="project-card glass-card" data-category="tvc">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Xiamen International Marathon TVC</h3>
+                                <p class="text-gray-600 text-sm">Role: Copywriter / Assistant Director</p>
+                            </div>
+
+                        </div>
+                        <div class="accordion-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                                <div class="text-gray-700 leading-relaxed">
+                                    <p>Promotional video for the 2024 C&D Xiamen International Marathon.</p>
+                                    <a href="https://vimeo.com/1080807416?share=copy" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on Vimeo</a>
+                                </div>
+                                <div class="photo-stack">
+                                    <a href="images/TVC-xiamenmalasong-1.png" data-fancybox="gallery-xiamen-marathon" class="stack-item"><img src="images/TVC-xiamenmalasong-1.png" alt="TVC Still 1" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0ea5e9/ffffff?text=TVC+Image+1';"></a>
+                                    <a href="images/TVC-xiamenmalasong-2.png" data-fancybox="gallery-xiamen-marathon" class="stack-item"><img src="images/TVC-xiamenmalasong-2.png" alt="TVC Still 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0284c7/ffffff?text=TVC+Image+2';"></a>
+                                    <a href="images/TVC-xiamenmalasong-3.png" data-fancybox="gallery-xiamen-marathon" class="stack-item"><img src="images/TVC-xiamenmalasong-3.png" alt="TVC Still 3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0369a1/ffffff?text=TVC+Image+3';"></a>
+                                    <a href="images/TVC-xiamenmalasong-4.png" data-fancybox="gallery-xiamen-marathon" class="stack-item"><img src="images/TVC-xiamenmalasong-4.png" alt="TVC Still 4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0369a1/ffffff?text=TVC+Image+4';"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目卡片: Double Support Train TVC -->
+                <div class="project-card glass-card" data-category="tvc">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Double Support Train TVC</h3>
+                                <p class="text-gray-600 text-sm">Role: Copywriter / Director</p>
+                            </div>
+
+                        </div>
+                        <div class="accordion-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                                <div class="text-gray-700 leading-relaxed">
+                                    <p>Xiamen Double Support Train Government Promotional Video.</p>
+                                    <a href="https://vimeo.com/1080807516?share=copy" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on Vimeo</a>
+                                </div>
+                                <div class="photo-stack">
+                                    <a href="images/TVC-shuangyonghaolieche-1.png" data-fancybox="gallery-shuangyong" class="stack-item"><img src="images/TVC-shuangyonghaolieche-1.png" alt="TVC Still 1" onerror="this.onerror=null;this.src='https://placehold.co/600x400/f97316/ffffff?text=TVC+Image+1';"></a>
+                                    <a href="images/TVC-shuangyonghaolieche-2.png" data-fancybox="gallery-shuangyong" class="stack-item"><img src="images/TVC-shuangyonghaolieche-2.png" alt="TVC Still 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/ea580c/ffffff?text=TVC+Image+2';"></a>
+                                    <a href="images/TVC-shuangyonghaolieche-3.png" data-fancybox="gallery-shuangyong" class="stack-item"><img src="images/TVC-shuangyonghaolieche-3.png" alt="TVC Still 3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/c2410c/ffffff?text=TVC+Image+3';"></a>
+                                    <a href="images/TVC-shuangyonghaolieche-4.png" data-fancybox="gallery-shuangyong" class="stack-item"><img src="images/TVC-shuangyonghaolieche-4.png" alt="TVC Still 4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/c2410c/ffffff?text=TVC+Image+4';"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 【已修复】项目卡片: Brand Marketing Proposals -->
+                <div class="project-card glass-card" data-category="proposal">
+                    <div class="p-6 sm:p-8">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-1">Brand Marketing Proposals</h3>
+                            <p class="text-gray-600 text-sm">Role: Strategist / Copywriter</p>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="pt-4">
+                                <div class="text-gray-700 leading-relaxed mb-8">
+                                    <p class="mb-2">1. “Let's Go”<br> The First Slow-Paced Travel Reality Show Featuring Generation Z</p>
+                                    <p class="mb-2">2. “Twenty Years of Dedication, Love for Dali Garden”<br> Dali Garden's 2022 Spring Brand Marketing Campaign</p>
+                                    <p class="mb-2">3. “The Other Side of Young People”<br> Xianmianzhuan Noodles & Wuling Automobile Co-Branding Marketing Campaign</p>
+                                    <a href="https://pan.baidu.com/s/1DbqkwyMFfYgnUVFPVV8Cjg?pwd=p44m" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on Baidu Pan (code: p44m)</a>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                                    <img src="images/zouba.jpg" alt="Let's Go Proposal" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/ef4444/ffffff?text=Proposal+1';">
+                                    <img src="images/daliyuan.jpg" alt="Daliyuan Proposal" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/dc2626/ffffff?text=Proposal+2';">
+                                    <img src="images/xianmianzhuan.jpg" alt="Xianmianzhuan Proposal" class="rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/b91c1c/ffffff?text=Proposal+3';">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 【已修复】项目卡片: Social Media Operation -->
+                <div class="project-card glass-card" data-category="social">
+                    <div class="p-6 sm:p-8">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-1">Social Media Operation</h3>
+                            <p class="text-gray-600 text-sm">Role: Content Creator / Community Manager</p>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="pt-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                                    <div>
+                                        <h4 class="font-semibold text-lg mb-4">RED account: 今天柒啥桃</h4>
+                                        <img src="images/meitiyunying-chengshiquanquan-1.png" alt="RED Account" class="rounded-lg shadow-lg mx-auto mb-4 w-10/12 h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/8b5cf6/ffffff?text=RED';">
+                                        <p class="text-sm text-gray-600 text-left">Build and incubate the account from scratch; Plan special topics and online activities, and create text and image content; Collaborate with offline events to expand content reach, achieving nearly 1,000 traffic conversions.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-lg mb-4">WeChat: 火星馬戲團藝術書店</h4>
+                                        <img src="images/meitiyunying-huoxingmaxituan-1.png.png" alt="WeChat Account" class="rounded-lg shadow-lg mx-auto mb-4 w-10/12 h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/7c3aed/ffffff?text=WeChat';">
+                                        <p class="text-sm text-gray-600 text-left">Complete platform matrix setup and produce video content; Maintain community operations and plan online events; Achieve over 50,000 shopping cart conversions.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-lg mb-4">Tiktok account: 咪咕視頻</h4>
+                                        <img src="images/meitiyunying-migutiyu-1.png.png" alt="Tiktok Account" class="rounded-lg shadow-lg mx-auto mb-4 w-10/12 h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/6d28d9/ffffff?text=Tiktok';">
+                                        <p class="text-sm text-gray-600 text-left">Assist in the overall operation of the company's platform accounts; Plan over 10 special topics based on current popular variety shows; Edit over 100 short videos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目卡片: Graphic Works -->
+                <div class="project-card glass-card" data-category="graphics">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Poster</h3>
+                                <p class="text-gray-600 text-sm">Role: Designer</p>
+                            </div>
+                        </div>
+                        <div class="accordion-content" style="max-height: none; padding-top: 1rem;">
+                            <div class="p-4">
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                    <a href="images/haibao-diangyinghaibao-1.png" data-fancybox="gallery-posters">
+                                        <img src="images/haibao-diangyinghaibao-1.png" alt="Movie Poster 1" class="w-full h-auto rounded-lg object-cover shadow-md transition-transform hover:scale-105">
+                                    </a>
+                                    <a href="images/haibao-dianyinghaibao-2.png" data-fancybox="gallery-posters">
+                                        <img src="images/haibao-dianyinghaibao-2.png" alt="Movie Poster 2" class="w-full h-auto rounded-lg object-cover shadow-md transition-transform hover:scale-105">
+                                    </a>
+                                    <a href="images/haibao-sheyinghaibao-1.jpg" data-fancybox="gallery-posters">
+                                        <img src="images/haibao-sheyinghaibao-1.jpg" alt="Photo Poster 1" class="w-full h-auto rounded-lg object-cover shadow-md transition-transform hover:scale-105">
+                                    </a>
+                                    <a href="images/haibao-sheyinghaibao-2.jpg" data-fancybox="gallery-posters">
+                                        <img src="images/haibao-sheyinghaibao-2.jpg" alt="Photo Poster 2" class="w-full h-auto rounded-lg object-cover shadow-md transition-transform hover:scale-105">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card" data-category="graphics">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Photography</h3>
+                                <p class="text-gray-600 text-sm">Role: Photographer</p>
+                            </div>
+                        </div>
+                        <div class="accordion-content" style="max-height: none; padding-top: 1rem;">
+                            <div class="p-4">
+                                <div class="masonry-gallery">
+                                    <a href="images/sheying-chuangyisheying-1.pic.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-chuangyisheying-1.pic.jpg" alt="Creative Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-chuangyisheying-2.pic.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-chuangyisheying-2.pic.jpg" alt="Creative Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-chuangyisheying-3.pic.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-chuangyisheying-3.pic.jpg" alt="Creative Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-jingwusheying-1.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-jingwusheying-1.jpg" alt="Landscape Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-jingwusheying-2.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-jingwusheying-2.jpg" alt="Landscape Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-jingwusheying-3.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-jingwusheying-3.jpg" alt="Landscape Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-renxiangsheying-1.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-renxiangsheying-1.jpg" alt="Portrait Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-renxiangsheying-2.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-renxiangsheying-2.jpg" alt="Portrait Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-renxiangsheying-3.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-renxiangsheying-3.jpg" alt="Portrait Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-shangyesheying-1.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-shangyesheying-1.jpg" alt="Commercial Photo 1" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-shangyesheying-2.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-shangyesheying-2.jpg" alt="Commercial Photo 2" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                    <a href="images/sheying-shangyesheying-3.jpg" data-fancybox="gallery-photo" style="break-inside: avoid;"><img src="images/sheying-shangyesheying-3.jpg" alt="Commercial Photo 3" class="w-full h-auto rounded-lg object-cover shadow-md block transition-transform hover:scale-105"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card" data-category="exhibition">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">Minnan Dialect Exhibition</h3>
+                                <p class="text-gray-600 text-sm">Role: Curator / Designer / Social Media</p>
+                            </div>
+
+                        </div>
+                        <div class="accordion-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                                <div class="text-gray-700 leading-relaxed">
+                                    <p>This project targets young audiences in the Fujian and Taiwan region, tracing the origins of unique words in the Minnan dialect and developing creative concepts. It combines an offline exhibition with online interactive promotions, presenting the content in a visually engaging manner. The project operates an online WeChat official account “Qi Tao FM” and a Xiaohongshu account @Today's Qi Tao, with a total fan base exceeding 1,000.</p>
+                                    <a href="https://mp.weixin.qq.com/s/ELraDZ6AqHSQopFmIJFGVg" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on WeChat</a>
+                                </div>
+                                <div class="photo-stack">
+                                    <a href="images/zhanlan-minnan-1.jpg" data-fancybox="gallery-minnan" class="stack-item"><img src="images/zhanlan-minnan-1.jpg" alt="Exhibition Photo 1" onerror="this.onerror=null;this.src='https://placehold.co/600x400/16a34a/ffffff?text=Exhibition+1';"></a>
+                                    <a href="images/zhanlan-minnan-2.png" data-fancybox="gallery-minnan" class="stack-item"><img src="images/zhanlan-minnan-2.png" alt="Exhibition Photo 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/15803d/ffffff?text=Exhibition+2';"></a>
+                                    <a href="images/zhanlan-minnan-4.jpg" data-fancybox="gallery-minnan" class="stack-item"><img src="images/zhanlan-minnan-4.jpg" alt="Exhibition Photo 3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/166534/ffffff?text=Exhibition+3';"></a>
+                                    <a href="images/zhanlan-minnan-3.jpg" data-fancybox="gallery-minnan" class="stack-item"><img src="images/zhanlan-minnan-3.jpg" alt="Exhibition Photo 4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/166534/ffffff?text=Exhibition+4';"></a>
+                                    <a href="images/zhanlan-minnan-5.jpg" data-fancybox="gallery-minnan" class="stack-item"><img src="images/zhanlan-minnan-5.jpg" alt="Exhibition Photo 5" onerror="this.onerror=null;this.src='https://placehold.co/600x400/166534/ffffff?text=Exhibition+5';"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card" data-category="exhibition">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold mb-1">MIFF-Mountain Isle Film Festival</h3>
+                                <p class="text-gray-600 text-sm">Role: film selector/Film Critic/Curator's Assistant</p>
+                            </div>
+
+                        </div>
+                        <div class="accordion-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                                <div class="text-gray-700 leading-relaxed">
+                                    <p>Initiated independently by faculty and students from the School of Film, Television, and Communication at Xiamen University of Technology, this campus film festival aims to create a warm, youthful, and intellectually stimulating platform for film enthusiasts. The film festival has now successfully held five editions, garnering significant media attention, with its audience continuing to expand.</p>
+                                    <a href="https://mp.weixin.qq.com/s/XqKE11d9Tdc5bSPfG-V5YA" target="_blank" rel="noopener noreferrer" class="text-sky-600 hover:underline mt-4 inline-block">View on WeChat</a>
+                                </div>
+                                <div class="photo-stack">
+    <a href="images/zhanlan-shan-2.jpg" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-2.jpg" alt="MIFF Photo 2" onerror="this.onerror=null;this.src='https://placehold.co/600x400/4d7c0f/ffffff?text=MIFF+2';"></a>
+    
+    <a href="images/zhanlan-shan-3.jpg" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-3.jpg" alt="MIFF Photo 3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/3f6212/ffffff?text=MIFF+3';"></a>
+    <a href="images/zhanlan-shan-1.png" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-1.png" alt="MIFF Photo 1" onerror="this.onerror=null;this.src='https://placehold.co/600x400/65a30d/ffffff?text=MIFF+1';"></a>
+    <a href="images/zhanlan-shan-7.png" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-7.png" alt="MIFF Photo 7" onerror="this.onerror=null;this.src='https://placehold.co/600x400/3f6212/ffffff?text=MIFF+7';"></a>
+    <a href="images/zhanlan-shan-6.png" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-6.png" alt="MIFF Photo 6" onerror="this.onerror=null;this.src='https://placehold.co/600x400/3f6212/ffffff?text=MIFF+6';"></a>
+    <a href="images/zhanlan-shan-4.jpg" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-4.jpg" alt="MIFF Photo 4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/3f6212/ffffff?text=MIFF+4';"></a>
+    <a href="images/zhanlan-shan-5.png" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-5.png" alt="MIFF Photo 5" onerror="this.onerror=null;this.src='https://placehold.co/600x400/3f6212/ffffff?text=MIFF+5';"></a>
+    <a href="images/zhanlan-shan-1.png" data-fancybox="gallery-miff" class="stack-item"><img src="images/zhanlan-shan-1.png" alt="MIFF Photo 1" onerror="this.onerror=null;this.src='https://placehold.co/600x400/65a30d/ffffff?text=MIFF+1';"></a>
+    
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
         <!-- 技能与专长 -->
         <section id="skills" class="py-24">
@@ -1003,75 +1030,89 @@
     </footer>
 
     <script>
-        /* 当整个HTML文档加载并解析完成后，执行此脚本内的代码 */
         document.addEventListener('DOMContentLoaded', () => {
+            const filterContainer = document.getElementById('filter-buttons');
+            const portfolioGrid = document.getElementById('portfolio-grid');
 
-            /* --- 折叠菜单逻辑：针对主分类 --- */
-            document.querySelectorAll('.category-toggle-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const header = e.currentTarget;
-                    const content = header.nextElementSibling;
-                    if (!content) return;
-
-                    const buttonText = header.querySelector('.toggle-button');
-                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
-
-                    if (isOpen) {
-                        content.style.maxHeight = '0px';
-                        if (buttonText) buttonText.textContent = 'View';
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        if (buttonText) buttonText.textContent = 'Hide';
-                    }
-                });
-            });
-
-            /* --- 折叠菜单逻辑：针对单个项目 (已更新，支持瀑布流) --- */
-            document.querySelectorAll('.project-toggle-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const projectItem = button.closest('.project-item');
-                    if (!projectItem) return;
-
-                    const projectContent = projectItem.querySelector('.project-accordion-content');
-                    const parentCategoryContent = button.closest('.category-accordion-content');
-                    if (!projectContent || !parentCategoryContent) return;
-
-                    const wasOpen = projectContent.style.maxHeight && projectContent.style.maxHeight !== '0px';
-
-                    if (wasOpen) {
-                        // 计算父容器应减少的高度时，需要考虑父容器当前的实际高度
-                        const currentParentHeight = parentCategoryContent.scrollHeight;
-                        parentCategoryContent.style.maxHeight = (currentParentHeight - projectContent.scrollHeight) + 'px';
-                        projectContent.style.maxHeight = '0px';
-                        button.textContent = 'View Details';
-                    } else {
-                        const currentParentHeight = parentCategoryContent.scrollHeight;
-                        projectContent.style.maxHeight = projectContent.scrollHeight + 'px';
-                        const newParentHeight = currentParentHeight + projectContent.scrollHeight;
-                        parentCategoryContent.style.maxHeight = newParentHeight + 'px';
-                        button.textContent = 'Hide Details';
-
-                        // ▼▼▼ 瀑布流初始化代码 ▼▼▼
-                        const gallery = projectContent.querySelector('#photography-gallery');
-                        if (gallery) {
-                            setTimeout(() => {
-                                new Masonry(gallery, {
-                                    itemSelector: '.masonry-item',
-                                    percentPosition: true
-                                });
-                            }, 300);
+            // 定义一个函数，用于执行初始的筛选（页面加载时默认显示第一类的作品）
+            const performInitialFilter = () => {
+                const initialActiveButton = filterContainer.querySelector('.filter-btn.active');
+                if (initialActiveButton) {
+                    const initialCategory = initialActiveButton.dataset.category;
+                    const allCards = portfolioGrid.querySelectorAll('.project-card');
+                    allCards.forEach(card => {
+                        if (card.dataset.category === initialCategory) {
+                            card.style.display = 'block'; // 显示匹配分类的卡片
+                        } else {
+                            card.style.display = 'none'; // 隐藏不匹配的卡片
                         }
-                        // ▲▲▲ 瀑布流代码结束 ▲▲▲
+                    });
+                }
+            };
+
+            // 为筛选按钮容器添加点击事件监听
+            if (filterContainer) {
+                filterContainer.addEventListener('click', (e) => {
+                    // 确保点击的是筛选按钮
+                    if (!e.target.matches('.filter-btn')) return;
+                    
+                    const clickedButton = e.target;
+                    const category = clickedButton.dataset.category;
+                    const projectCards = portfolioGrid.querySelectorAll('.project-card');
+
+                    // 移除旧的激活按钮样式
+                    const activeButton = filterContainer.querySelector('.active');
+                    if (activeButton) {
+                        activeButton.classList.remove('active', 'bg-gray-800', 'text-white');
+                        activeButton.classList.add('bg-white', 'text-gray-700');
                     }
+                    // 为被点击的按钮添加激活样式
+                    clickedButton.classList.add('active', 'bg-gray-800', 'text-white');
+                    clickedButton.classList.remove('bg-white', 'text-gray-700');
+
+                    // 根据选择的分类显示或隐藏作品卡片
+                    projectCards.forEach(card => {
+                        if (card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
                 });
-            });
+            }
 
-            // 初始化 Fancybox 图片灯箱效果
-            Fancybox.bind("[data-fancybox]");
+            // --- 下面的逻辑是为 hyl084.html 设计的，保留它没有坏处 ---
+            // 这段代码的目的是让某些卡片内容区默认展开，并移除它们的展开/折叠按钮
+            const setAlwaysOpenCards = () => {
+                const alwaysOpenContents = document.querySelectorAll(
+                    '.project-card[data-category="proposal"] .accordion-content, .project-card[data-category="social"] .accordion-content, .project-card[data-category="graphics"] .accordion-content'
+                );
 
+                alwaysOpenContents.forEach(content => {
+                    // 临时给一个足够大的高度以确保内容完全显示
+                    content.style.maxHeight = '2000px'; 
+                });
+            };
+
+            // --- 初始化操作 ---
+            setAlwaysOpenCards();
+            performInitialFilter(); // 执行初始筛选
+            Fancybox.bind("[data-fancybox]", {}); // 初始化图片灯箱效果
         });
     </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+    ```
+
+### 关键点解释：
+
+1.  **移除了旧逻辑**：旧的针对 `.category-toggle-btn` 和 `.project-toggle-btn` 的折叠菜单点击事件处理代码已经完全被移除。
+2.  **保留了新逻辑**：新的代码核心是 `filterContainer` 的点击事件，它会根据你点击的按钮（如“Short Films”、“TVC”等）来显示或隐藏对应的作品卡片。
+3.  **保留了Fancybox**：`Fancybox.bind(...)` 和其 JS 库的 `<script>` 引用被保留，因为新的作品集依然使用它来提供图片点击放大的灯箱效果。
+4.  **移除了Masonry**：`masonry.pkgd.min.js` 的 `<script>` 引用被移除了，因为新的摄影作品集 (`<div class="masonry-gallery">`) 使用的是更现代、更高效的纯 CSS `column-count` 属性来实现瀑布流布局，不再需要 JavaScript 库的辅助。
+
+你只需要将上面这个代码块整体复制，替换掉你 `hyl083.html` 文件末尾的脚本部分，功能就完全匹配了。
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js">
     </script>
