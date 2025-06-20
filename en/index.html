@@ -1113,7 +1113,7 @@
         Fancybox.bind("[data-fancybox]", {}); // 初始化图片灯箱效果
       });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script> ``` ### 关键点解释： 1. **移除了旧逻辑**：旧的针对 `.category-toggle-btn` 和 `.project-toggle-btn` 的折叠菜单点击事件处理代码已经完全被移除。 2. **保留了新逻辑**：新的代码核心是 `filterContainer` 的点击事件，它会根据你点击的按钮（如“Short Films”、“TVC”等）来显示或隐藏对应的作品卡片。 3. **保留了Fancybox**：`Fancybox.bind(...)` 和其 JS 库的 ` <script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script> ```  <script>
       ` 引用被保留，因为新的作品集依然使用它来提供图片点击放大的灯箱效果。
 4.  **移除了Masonry**：`
       masonry.pkgd.min.js` 的 ` < script > ` 引用被移除了，因为新的摄影作品集 (` < div class = "masonry-gallery" > `) 使用的是更现代、更高效的纯 CSS `
