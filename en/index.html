@@ -32,14 +32,17 @@
         font-family: 'Inter', sans-serif;
         color: #1a202c;
         margin: 0;
+
         /* --- 背景图相关 --- */
         background-image: linear-gradient(to bottom, rgba(245, 247, 250, 0) 0%, #f5f7fa 80%), url('images/background.jpg');
         background-color: #f5f7fa;
         /* 后备颜色 */
         background-repeat: no-repeat;
         background-position: center center;
+
         /* 关键: 默认在电脑端使用 fixed 实现视差滚动 */
         background-attachment: fixed;
+
         /* 关键: cover 会让背景图铺满容器，在 fixed 模式下是铺满视口 */
         background-size: cover;
       }
@@ -62,9 +65,11 @@
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
       }
 
+
       /* ================================================== */
       /* ↓↓↓ 用于“照片堆叠”效果的CSS样式 (已移至正确位置) ↓↓↓ */
       /* ================================================== */
+
       /* 照片堆叠效果的容器 */
       .photo-stack {
         position: relative;
@@ -80,8 +85,7 @@
         /* 整个区域都显示可点击的手型光标 */
       }
 
-      /* 堆叠中的每一个项目（也就是包裹图片的
-												<a>标签） */
+    /* 堆叠中的每一个项目（也就是包裹图片的<a>标签） */
       .stack-item {
         position: absolute;
         /* 关键：让所有图片都叠在同一个位置 */
@@ -216,6 +220,7 @@
         /* 增加底部间距 */
       }
 
+
       /* --- 照片堆叠效果 --- */
       .photo-stack {
         position: relative;
@@ -314,10 +319,15 @@
           /* 小型屏幕(如手机)显示2列 */
         }
       }
+        
     </style>
+
   </head>
   <!-- antialiased 类用于平滑字体渲染，使其更清晰 -->
+
   <body class="antialiased">
+    
+    
     <!-- 网页头部 / 导航栏 -->
     <!-- sticky top-0 使其在滚动时吸顶, z-40 设置层级防止被覆盖 -->
     <header class="sticky top-0 z-40 py-2">
@@ -326,6 +336,7 @@
           <div class="text-2xl font-bold text-gray-800">
             <a href="#">He Yalin</a>
           </div>
+
           <div class="hidden md:flex space-x-8">
             <a href="#about" class="text-gray-700 hover:text-sky-600 font-medium transition">About</a>
             <a href="#experience" class="text-gray-700 hover:text-sky-600 font-medium transition">Experience</a>
@@ -336,10 +347,32 @@
           <div class="hidden md:flex items-center space-x-4">
             <a href="/zh-hk/" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-black transition-colors">繁體中文</a>
             <a href="#contact" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-black transition-colors">Contact Me</a>
+            </div>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-800 hover:text-sky-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
           </div>
         </nav>
       </div>
+
+    <div id="mobile-menu" class="hidden md:hidden glass-card mt-2">
+        <div class="px-6 pt-2 pb-8 space-y-4">
+             <a href="#about" class="block text-gray-700 hover:text-sky-600 font-medium transition">  About</a>
+             <a href="#experience" class="block text-gray-700 hover:text-sky-600 font-medium transition">Experience</a>
+             <a href="#portfolio" class="block text-gray-700 hover:text-sky-600 font-medium transition">Portfolio</a>
+             <a href="#skills" class="block text-gray-700 hover:text-sky-600 font-medium transition">Skills</a>
+             <a href="#awards" class="block text-gray-700 hover:text-sky-600 font-medium transition">Awards</a>
+             <a href="/en/" class="block bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-black transition-colors text-center">繁體中文</a>
+             <a href="#contact" class="block bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-black transition-colors text-center">Contact Me</a>
+        </div>
+    </div>
     </header>
+
+
     <!-- 主体内容区域 -->
     <main>
       <!-- 英雄区域 (Hero Section) - 页面顶部的欢迎部分 -->
@@ -658,6 +691,7 @@
                 </div>
               </div>
             </div>
+
             <!-- 【已修复】项目卡片: Brand Marketing Proposals -->
             <div class="project-card glass-card" data-category="proposal">
               <div class="p-6 sm:p-8">
@@ -688,6 +722,7 @@
                 </div>
               </div>
             </div>
+
             <!-- 【已修复】项目卡片: Social Media Operation -->
             <div class="project-card glass-card" data-category="social">
               <div class="p-6 sm:p-8">
@@ -696,12 +731,12 @@
                   <p class="text-gray-600 text-sm">Role: Content Creator / Community Manager</p>
                 </div>
                 <div class="accordion-content">
-                  <div class="pt-4">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center pt-6">
+
                       <div>
                         <h4 class="font-semibold text-lg mb-4">RED account: 今天柒啥桃</h4>
                         <a href="images/meitiyunying-chengshiquanquan-1.png" data-fancybox="gallery-social" data-caption="RED account: 今天柒啥桃">
-                          <img src="images/meitiyunying-chengshiquanquan-1.png" alt="RED Account" class=class="rounded-lg shadow-lg mx-auto mb-4 w-10/12 max-w-xs h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/8b5cf6/ffffff?text=RED';">
+                          <img src="images/meitiyunying-chengshiquanquan-1.png" alt="RED Account" class="rounded-lg shadow-lg mx-auto mb-4 w-full max-w-xs h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/8b5cf6/ffffff?text=RED';">
                         </a>
                         <p class="text-sm text-gray-600 text-left">
                           <br>Build and incubate the account from scratch; <br> Plan special topics and online activities, and create text and image content; <br>Collaborate with offline events to expand content reach, achieving nearly 1,000 traffic conversions.
@@ -710,7 +745,7 @@
                       <div>
                         <h4 class="font-semibold text-lg mb-4">WeChat: 火星馬戲團藝術書店</h4>
                         <a href="images/meitiyunying-huoxingmaxituan-1.png.png" data-fancybox="gallery-social" data-caption="WeChat: 火星馬戲團藝術書店">
-                          <img src="images/meitiyunying-huoxingmaxituan-1.png.png" alt="WeChat Account" class=class="rounded-lg shadow-lg mx-auto mb-4 w-10/12 max-w-xs h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/7c3aed/ffffff?text=WeChat';">
+                          <img src="images/meitiyunying-huoxingmaxituan-1.png.png" alt="WeChat Account" class="rounded-lg shadow-lg mx-auto mb-4 w-full max-w-xs h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/7c3aed/ffffff?text=WeChat';">
                         </a>
                         <p class="text-sm text-gray-600 text-left">
                           <br>Complete platform matrix setup and produce video content; <br>Maintain community operations and plan online events; <br>Achieve over 50,000 shopping cart conversions.
@@ -719,7 +754,7 @@
                       <div>
                         <h4 class="font-semibold text-lg mb-4">Tiktok account: 咪咕視頻</h4>
                         <a href="images/meitiyunying-migutiyu-1.png.png" data-fancybox="gallery-social" data-caption="Tiktok account: 咪咕視頻">
-                          <img src="images/meitiyunying-migutiyu-1.png.png" alt="Tiktok Account" class=class="rounded-lg shadow-lg mx-auto mb-4 w-10/12 max-w-xs h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/6d28d9/ffffff?text=Tiktok';">
+                          <img src="images/meitiyunying-migutiyu-1.png.png" alt="Tiktok Account" class="rounded-lg shadow-lg mx-auto mb-4 w-full max-w-xs h-auto" onerror="this.onerror=null;this.src='https://placehold.co/270x540/6d28d9/ffffff?text=Tiktok';">
                         </a>
                         <p class="text-sm text-gray-600 text-left">
                           <br>Assist in the overall operation of the company's platform accounts; <br>Plan over 10 special topics based on current popular variety shows; <br>Edit over 100 short videos.
@@ -729,7 +764,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+
             <!-- 项目卡片: Graphic Works -->
             <div class="project-card glass-card" data-category="graphics">
               <div class="p-6 sm:p-8">
@@ -1042,43 +1077,54 @@
                       <p class="text-lg text-gray-900">WeChat: Ngalam950810</p>
                     </div>
                   </div>
+
                 </div>
               </div>
             </section>
+
+
     </main>
+
     <!-- 页脚 -->
     <footer class="py-12">
       <div class="container mx-auto px-6 text-center text-gray-800">
         <p>&copy; 2025 He Yalin. All Rights Reserved.</p>
       </div>
     </footer>
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const filterContainer = document.getElementById('filter-buttons');
         const portfolioGrid = document.getElementById('portfolio-grid');
+
         // 定义一个函数，用于执行初始的筛选（页面加载时默认显示第一类的作品）
         const performInitialFilter = () => {
           const initialActiveButton = filterContainer.querySelector('.filter-btn.active');
           if (initialActiveButton) {
             const initialCategory = initialActiveButton.dataset.category;
             const allCards = portfolioGrid.querySelectorAll('.project-card');
+
             allCards.forEach(card => {
-              if (card.dataset.category === initialCategory) {
-                card.style.display = 'block'; // 显示匹配分类的卡片
+            // 新逻辑：如果类别不匹配，就添加 'hidden' 类，否则移除 'hidden' 类
+            if (card.dataset.category !== initialCategory) {
+                card.classList.add('hidden');
               } else {
-                card.style.display = 'none'; // 隐藏不匹配的卡片
+                card.classList.remove('hidden');
               }
             });
           }
         };
+
         // 为筛选按钮容器添加点击事件监听
         if (filterContainer) {
           filterContainer.addEventListener('click', (e) => {
             // 确保点击的是筛选按钮
             if (!e.target.matches('.filter-btn')) return;
+                    
             const clickedButton = e.target;
             const category = clickedButton.dataset.category;
             const projectCards = portfolioGrid.querySelectorAll('.project-card');
+
             // 移除旧的激活按钮样式
             const activeButton = filterContainer.querySelector('.active');
             if (activeButton) {
@@ -1088,43 +1134,76 @@
             // 为被点击的按钮添加激活样式
             clickedButton.classList.add('active', 'bg-gray-800', 'text-white');
             clickedButton.classList.remove('bg-white', 'text-gray-700');
+
             // 根据选择的分类显示或隐藏作品卡片
             projectCards.forEach(card => {
-              if (card.dataset.category === category) {
-                card.style.display = 'block';
+    // 新逻辑：如果类别不匹配，就添加 'hidden' 类，否则移除 'hidden' 类
+    if (card.dataset.category !== category) {
+        card.classList.add('hidden');
               } else {
-                card.style.display = 'none';
+        card.classList.remove('hidden');
               }
             });
           });
         }
+
         // --- 下面的逻辑是为 hyl084.html 设计的，保留它没有坏处 ---
         // 这段代码的目的是让某些卡片内容区默认展开，并移除它们的展开/折叠按钮
-        const setAlwaysOpenCards = () => {
-          const alwaysOpenContents = document.querySelectorAll('.project-card[data-category="proposal"] .accordion-content, .project-card[data-category="social"] .accordion-content, .project-card[data-category="graphics"] .accordion-content');
-          alwaysOpenContents.forEach(content => {
-            // 临时给一个足够大的高度以确保内容完全显示
-            content.style.maxHeight = '2000px';
-          });
-        };
-        // --- 初始化操作 ---
-        setAlwaysOpenCards();
+
+
+            // --- 初始化操作 ---
+            
         performInitialFilter(); // 执行初始筛选
         Fancybox.bind("[data-fancybox]", {}); // 初始化图片灯箱效果
       });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script> ```  <script>
-      ` 引用被保留，因为新的作品集依然使用它来提供图片点击放大的灯箱效果。
-4.  **移除了Masonry**：`
-      masonry.pkgd.min.js` 的 ` < script > ` 引用被移除了，因为新的摄影作品集 (` < div class = "masonry-gallery" > `) 使用的是更现代、更高效的纯 CSS `
-      column - count` 属性来实现瀑布流布局，不再需要 JavaScript 库的辅助。
 
-你只需要将上面这个代码块整体复制，替换掉你 `
-      hyl083.html` 文件末尾的脚本部分，功能就完全匹配了。
-
-    
-																																																																																												<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js">
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js">
     </script>
+
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... 你现有的 filter 和 fancybox 的代码保留不动 ...
+            const filterContainer = document.getElementById('filter-buttons');
+            const portfolioGrid = document.getElementById('portfolio-grid');
+
+            const performInitialFilter = () => {
+                // ... (这部分代码保持原样) ...
+            };
+
+            if (filterContainer) {
+                // ... (这部分代码保持原样) ...
+            }
+            
+            performInitialFilter(); 
+            Fancybox.bind("[data-fancybox]", {});
+
+            // --- 以下是新增的汉堡菜单逻辑 ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a'); // 获取菜单里的所有链接
+
+            // 当点击汉堡按钮时
+            mobileMenuButton.addEventListener('click', () => {
+                // 切换 mobile-menu 元素的 "hidden" 类
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // (可选，但强烈推荐) 当点击移动菜单中的任何一个链接时，自动关闭菜单
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
   </body>
+
+</html>
+
+</body>
+
 </html>
